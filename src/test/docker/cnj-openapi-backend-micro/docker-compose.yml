@@ -1,0 +1,32 @@
+# docker-compose.yml
+# ----------------------------------------------------------------------------
+# Composes Docker containers and volumes to a runnable Java EE application
+# ----------------------------------------------------------------------------
+#
+---
+version: '3'
+
+services:
+
+  downstream:
+    image: docker.cloudtrain.aws.msgoat.eu/cloudtrain/cnj-openapi-downstream-spring:latest
+    environment:
+      DOCKER_JAVA_OPTS: "-Xms1g -Xmx1g"
+      SPRING_PROFILES_ACTIVE: default
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI: https://oidc.cloudtrain.aws.msgoat.eu/realms/cloudtrain/protocol/openid-connect/certs
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI: https://oidc.cloudtrain.aws.msgoat.eu/realms/cloudtrain
+      LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_WEB_FILTER_COMMONSREQUESTLOGGINGFILTER: DEBUG
+
+  backend:
+    image: ${docker.image.name}:${project.version}
+    ports:
+      - "38080:8080"
+      - "38089:8089"
+    environment:
+      AGENT_JAVA_OPTS: "-javaagent:/home/payara/org.jacoco.agent.jar=output=tcpserver,address=*,port=8089"
+      DOCKER_JAVA_OPTS: "-Xms1g -Xmx1g"
+      MP_JWT_VERIFY_PUBLICKEY_LOCATION: "https://oidc.cloudtrain.aws.msgoat.eu/realms/cloudtrain/protocol/openid-connect/certs"
+      MP_JWT_VERIFY_ISSUER: "https://oidc.cloudtrain.aws.msgoat.eu/realms/cloudtrain"
+      CLOUDTRAIN_SERVICES_GRANTEDPERMISSIONS_MP_REST_URL: "http://downstream:8080"
+    depends_on:
+      - downstream
