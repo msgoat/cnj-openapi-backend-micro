@@ -47,7 +47,7 @@ public class TasksEndpointSystemTest {
     }
 
     @AfterEach
-    public void onAfter() {
+    void onAfter() {
         for (String current : this.trashBin) {
             try {
                 given().auth().oauth2(fixture.getAccessToken()).delete(current).then().assertThat().statusCode(204);
@@ -60,12 +60,12 @@ public class TasksEndpointSystemTest {
     }
 
     @Test
-    public void postWithValidTaskReturns201AndLocation() {
+    void postWithValidTaskReturns201AndLocation() {
         addTask(createTask());
     }
 
     @Test
-    public void getWithValidTaskIdReturnsValidTask() {
+    void getWithValidTaskIdReturnsValidTask() {
         JsonObject expected = createTask();
         String location = addTask(expected);
         ExtractableResponse response = given().log().body(true).auth().oauth2(fixture.getAccessToken())
@@ -82,7 +82,7 @@ public class TasksEndpointSystemTest {
     }
 
     @Test
-    public void getWithoutTaskIdReturnsAllTasks() {
+    void getWithoutTaskIdReturnsAllTasks() {
         addTask(createTask());
         ExtractableResponse response = given().auth().oauth2(fixture.getAccessToken())
                 .accept(ContentType.JSON)
@@ -96,7 +96,7 @@ public class TasksEndpointSystemTest {
     }
 
     // @Test
-    public void addTaskWithForwardedHeadersMustReturnExpectedLocation() {
+    void addTaskWithForwardedHeadersMustReturnExpectedLocation() {
         Response postResponse = given().auth().oauth2(fixture.getAccessToken())
                 .accept(ContentType.JSON)
                 .contentType(ContentType.JSON)

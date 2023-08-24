@@ -29,7 +29,7 @@ public class OpenApiEndpointSystemTest {
     }
 
     @Test
-    public void getOpenApiReturns200AndOpenApiYaml() {
+    void getOpenApiReturns200AndOpenApiYaml() {
         given().get("/openapi")
                 .then()
                 .statusCode(200)

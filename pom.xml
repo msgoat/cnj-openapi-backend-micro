@@ -8,7 +8,7 @@
     <description>Cloud native Java backend based on Eclipse MicroProfile using MP OpenAPI feature to document REST APIs</description>
     <properties>
         <!-- new Maven version management -->
-        <revision>5.0.0</revision>
+        <revision>5.1.0</revision>
         <sha1>.12345678</sha1>
         <changelist>.LOCAL</changelist>
         <!-- general properties -->
@@ -61,7 +61,7 @@
         <maven.war.plugin.version>3.3.2</maven.war.plugin.version>
         <maven.payara.micro.plugin.version>2.0</maven.payara.micro.plugin.version>
         <!-- pinning versions of cloud native specific maven plugins -->
-        <maven.compose.plugin.version>4.0.0</maven.compose.plugin.version>
+        <maven.compose.plugin.version>5.0.0</maven.compose.plugin.version>
         <maven.docker.plugin.version>0.37.0</maven.docker.plugin.version>
         <maven.helm.plugin.version>4.0.0</maven.helm.plugin.version>
         <!-- quality assurance properties -->
@@ -151,7 +151,7 @@
         <dependency>
             <groupId>org.microprofile-ext.openapi-ext</groupId>
             <artifactId>openapi-ui</artifactId>
-            <version>1.1.4</version>
+            <version>2.0.0</version>
         </dependency>
         <!-- =========================== -->
         <!-- test time dependencies      -->
@@ -216,7 +216,6 @@
                         <showWarnings>true</showWarnings>
                         <compilerArgs>
                             <arg>-Xlint</arg>
-                            <!-- <arg>-Xdoclint</arg> -->
                         </compilerArgs>
                     </configuration>
                 </plugin>
@@ -356,6 +355,12 @@
                 </executions>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
     <profiles>
         <!-- profile local-stage -->
@@ -923,20 +928,6 @@
                                     <timeout>90s</timeout>
                                 </configuration>
                             </execution>
-                            <!--
-                                                        <execution>
-                                                            <id>helm-delete</id>
-                                                            <phase>post-integration-test</phase>
-                                                            <goals>
-                                                                <goal>uninstall</goal>
-                                                            </goals>
-                                                            <configuration>
-                                                                <releaseName>${project.artifactId}</releaseName>
-                                                                <namespace>${k8s.cluster.namespace}</namespace>
-                                                                <debug>true</debug>
-                                                            </configuration>
-                                                        </execution>
-                            -->
                         </executions>
                     </plugin>
                     <!-- run system tests on installed helm release -->
@@ -983,4 +974,30 @@
             <url>https://nexus.cloudtrain.aws.msgoat.eu/repository/cloudtrain-releases/</url>
         </repository>
     </distributionManagement>
+    <pluginRepositories>
+        <pluginRepository>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </releases>
+            <id>cloudtrain-maven-repository</id>
+            <name>msg Automotive CloudTrain Releases Repository</name>
+            <url>https://nexus.cloudtrain.aws.msgoat.eu/repository/cloudtrain-releases/</url>
+            <layout>default</layout>
+        </pluginRepository>
+    </pluginRepositories>
+    <repositories>
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </releases>
+            <id>cloudtrain-maven-repository</id>
+            <name>msg Automotive CloudTrain Releases Repository</name>
+            <url>https://nexus.cloudtrain.aws.msgoat.eu/repository/cloudtrain-releases/</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
 </project>

@@ -1,13 +1,12 @@
 openapi: 3.0.0
 info:
-  title: cnj-open-backend-micro
-  description: Cloud native Java backend based on Eclipse Microprofile using MP OpenAPI
-    feature to document REST APIs
+  title: ${project.artifactId}
+  description: ${project.description}
   contact:
-    url: https://github.com/msgoat/cnj-openapi
-  version: 4.0.0
+    url: https://github.com/msgoat/cnj-openapi-backend-micro
+  version: ${revision}
 servers:
-  - url: https://apps.cloudtrain.aws.msgoat.eu/cloudtrain-int/cnj-openapi-backend-micro
+  - url: https://train2023-dev.k8s.cloudtrain.aws.msgoat.eu/cloudtrain/cnj-openapi-backend-micro
 paths:
   /api/v1/tasks:
     get:
