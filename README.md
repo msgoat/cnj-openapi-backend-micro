@@ -22,7 +22,12 @@ In this showcase, [MP OpenApi feature](https://github.com/eclipse/microprofile-o
 of documenting REST API according to the OpenAPI standard: the actual OpenAPI specification file is generated from
 annotated application code. The generated OpenAPI specification file is served by MP OpenApi via `/openapi` in YAML format.
 
-A Swagger UI for the exposed REST API is available as well via `/swagger-ui/index.html`.
+To demonstrate the `API First` or `Contract First` approach as well, a static OpenAPI specification file has been
+added (see [openapi.yml](src/main/resources/META-INF/openapi.yml)) to the application code. The MP OpenAPI automatically
+serves the static file as well.
+
+MP OpenAPI supports a combination of both approaches: The `openapi.yml` file may be a fragment containing only the
+static parts the OpenAPI specification. Fragments will be merged with the OpenAPI data generated from annotated code.
 
 ## HOW-TO build this application locally
 
