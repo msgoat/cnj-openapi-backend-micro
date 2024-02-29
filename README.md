@@ -2,6 +2,10 @@
 
 Cloud native Java backend based on Eclipse MicroProfile using MP OpenAPI feature to document REST APIs.
 
+The application is packaged as a multi-architecture docker image which supports the following platforms:
+* linux/amd64
+* linux/arm64/v8
+
 ## Status
 
 ![Build status](https://codebuild.eu-west-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiTmh5RjJzNTlmSktpakk2eXorZUh6OUVUTDlVd0NhOGVoSElrMUVoeVEzeWdwWld1SVoxQm93aXBzaU5vYWg3OCtvcUE4RU5JbVdZMVhvazh0Tkk5VEZrPSIsIml2UGFyYW1ldGVyU3BlYyI6InVjbXJ2UEpWcGUxczl0b0wiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=main)
@@ -13,6 +17,10 @@ A changelog can be found in [changelog.md](changelog.md).
 ## Docker Pull Command
 
 `docker pull docker.cloudtrain.aws.msgoat.eu/cloudtrain/cnj-openapi-backend-micro`
+
+## Helm Pull Command
+
+`helm pull oci://docker.cloudtrain.aws.msgoat.eu/cloudtrain-charts/cnj-openapi-backend-micro`
 
 ## Synopsis
 
